@@ -2,9 +2,6 @@ module Main
 
 import Data.Vect
 
-main : IO ()
-main = ?main_rhs
-
 data DataStore : Type where
   MkData : (size: Nat) -> (items: Vect size String) -> DataStore
 
@@ -20,3 +17,6 @@ addToStore (MkData size items) y = MkData _ $ addToData items
     addToData : Vect old String -> Vect (S old) String
     addToData [] = [y]
     addToData (x :: xs) = x :: addToData xs
+
+main : IO ()
+main = replWith (MkData _ []) "Command: " ?processInput
